@@ -51,6 +51,7 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
+
         return allJobs;
     }
 
@@ -72,15 +73,59 @@ public class JobData {
 
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
+        String lower = value.toLowerCase();
+
         for (HashMap<String, String> row : allJobs) {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
-                jobs.add(row);
+            //fixed case sensative
+            if (!jobs.contains(row)) {
+
+                for (String word : aValue.split(" ")) {
+
+                    if (word.toLowerCase().contains(lower)) {
+                        jobs.add(row);
+
+                        break;
+
+                    }
+                }}}
+        return jobs;
+    }
+
+
+
+    public static ArrayList<HashMap<String, String>> findByValue(HashMap<String, String> columns, String value) {
+        // load data, if not already loaded
+        loadData();
+
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        String lower = value.toLowerCase();
+
+        for (HashMap<String, String> row : allJobs) {
+
+            for (String column : columns.keySet()) {
+
+                if (column.equals("all")) {
+                    continue;
+                }
+                String aValue = row.get(column);
+
+                //fixed case sensitive
+                if (!jobs.contains(row)) {
+
+                    for (String word : aValue.split(" ")) {
+
+                        if (word.toLowerCase().contains(lower)) {
+                            jobs.add(row);
+
+                            break;
+                        }
+                    }
+                }
             }
         }
-
         return jobs;
     }
 
