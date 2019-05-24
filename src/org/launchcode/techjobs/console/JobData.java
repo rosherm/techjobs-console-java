@@ -79,22 +79,16 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            //fixed case sensative
             if (!jobs.contains(row)) {
 
-                for (String word : aValue.split(" ")) {
-
-                    if (word.toLowerCase().contains(lower)) {
+                    if (aValue.toLowerCase().contains(lower)) {
                         jobs.add(row);
 
                         break;
 
-                    }
                 }}}
         return jobs;
     }
-
-
 
     public static ArrayList<HashMap<String, String>> findByValue(HashMap<String, String> columns, String value) {
         // load data, if not already loaded
@@ -112,12 +106,9 @@ public class JobData {
                 }
                 String aValue = row.get(column);
 
-                //fixed case sensitive
                 if (!jobs.contains(row)) {
 
-                    for (String word : aValue.split(" ")) {
-
-                        if (word.toLowerCase().contains(lower)) {
+                        if (aValue.toLowerCase().contains(lower)) {
                             jobs.add(row);
 
                             break;
@@ -125,7 +116,7 @@ public class JobData {
                     }
                 }
             }
-        }
+
         return jobs;
     }
 
